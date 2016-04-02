@@ -10,6 +10,10 @@
 
 @interface FirstViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIWebView *fastLoanWebView;
+
+- (void)getFirstViewURL:(BOOL)isRefresh;
+
 
 @end
 

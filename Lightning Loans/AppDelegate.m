@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <AVOSCloud/AVOSCloud.h>
+#import "FirstViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //设置程序的默认颜色
+    [self.window setTintColor:[UIColor redColor]];
+    //设置leancloud app Id
+#warning 更新自己的id
+    [AVOSCloud setApplicationId:@"#"
+                      clientKey:@"#"];
+    //统计应用的打开情况
+    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    //是否是第一次开启 viewapplear也会调用getFirstViewURL 设置此置避免两次调用
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLaunch"];
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    UINavigationController *firstNav = [tabBarController.viewControllers firstObject];
+    FirstViewController *firstVc = [firstNav.viewControllers firstObject];
+    [firstVc getFirstViewURL:NO];
     return YES;
 }
 
@@ -31,7 +46,11 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    tabBarController.selectedIndex = 0;
+    UINavigationController *firstNav = [tabBarController.viewControllers firstObject];
+    FirstViewController *firstVc = [firstNav.viewControllers firstObject];
+    [firstVc getFirstViewURL:NO];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
