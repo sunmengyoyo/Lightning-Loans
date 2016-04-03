@@ -22,8 +22,8 @@
     [self.window setTintColor:[UIColor redColor]];
     //设置leancloud app Id
 #warning 更新自己的id
-    [AVOSCloud setApplicationId:@"bi1EpwgcIhXeWytA3wxY7kOz-gzGzoHsz"
-                      clientKey:@"1Iitfo7VojWBrbJ4RVt0CBee"];
+    [AVOSCloud setApplicationId:@"#"
+                      clientKey:@"#"];
     //统计应用的打开情况
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     //是否是第一次开启 viewapplear也会调用getFirstViewURL 设置此置避免两次调用
